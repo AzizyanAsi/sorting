@@ -1,41 +1,44 @@
 package sortingTasks;
 
 public class SortingAlgortitms {
+    private SortingAlgortitms() {
+    }
+
     public static void insertionSort(int[] array) {
         for (int i = 1; i < array.length; i++) {
             int current = array[i];
             int j = i - 1;
-            while(j >= 0 && current < array[j]) {
-                array[j+1] = array[j];
+            while (j >= 0 && current < array[j]) {
+                array[j + 1] = array[j];
                 j--;
             }
-
-            array[j+1] = current;
+            array[j + 1] = current;
         }
     }
-    static int partition(int[] array, int begin, int end) {
-        int pivot = end;
 
+    private static void swap(int[] array, int n, int m) {
+        int temp = array[n];
+        array[n] = array[m];
+        array[m] = temp;
+    }
+
+    private static int partition(int[] array, int begin, int end) {
+        int pivot = end;
         int counter = begin;
         for (int i = begin; i < end; i++) {
             if (array[i] < array[pivot]) {
-                int temp = array[counter];
-                array[counter] = array[i];
-                array[i] = temp;
+                 swap(array, counter, i);
                 counter++;
             }
         }
-        int temp = array[pivot];
-        array[pivot] = array[counter];
-        array[counter] = temp;
-
+      swap(array, pivot, counter);
         return counter;
     }
 
     public static void quickSort(int[] array, int begin, int end) {
         if (end <= begin) return;
         int pivot = partition(array, begin, end);
-        quickSort(array, begin, pivot-1);
-        quickSort(array, pivot+1, end);
+        quickSort(array, begin, pivot - 1);
+        quickSort(array, pivot + 1, end);
     }
 }
